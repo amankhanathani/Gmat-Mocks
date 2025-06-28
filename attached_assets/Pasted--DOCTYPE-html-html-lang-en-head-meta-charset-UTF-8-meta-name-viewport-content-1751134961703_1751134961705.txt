@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMAT Mini-Mock Prep - Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            color: #6c757d;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .nav-tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .setup-section {
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .input-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .help-text {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .button.secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+        }
+
+        .button.danger {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+        }
+
+        .button.success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+
+        .question-display {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .question-link {
+            display: block;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .question-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .view-toggle {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .view-toggle.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .progress {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 5px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Session History Styles */
+        .session-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .session-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .session-date {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .session-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .session-stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .question-list {
+            margin-top: 15px;
+        }
+
+        .question-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .question-item.flagged {
+            border-left-color: #ffc107;
+        }
+
+        .question-item.incorrect {
+            border-left-color: #dc3545;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-link-small {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .question-link-small:hover {
+            text-decoration: underline;
+        }
+
+        .question-status {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-flagged {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-skipped {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .error-log {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .error-log textarea {
+            width: 100%;
+            height: 80px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 0.9em;
+            resize: vertical;
+        }
+
+        .question-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 5px 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn.flag {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .action-btn.correct {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn.incorrect {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn.skip {
+            background: #6c757d;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .current-session-actions {
+            background: #e7f3ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .current-session-actions h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .stats, .session-stats {
+                flex-direction: column;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .question-header, .session-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 GMAT Mini-Mock Prep</h1>
+        <p class="subtitle">Enhanced with Session Tracking & Error Analysis</p>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('practice')">📝 Practice</button>
+            <button class="nav-tab" onclick="switchTab('history')">📊 Session History</button>
+            <button class="nav-tab" onclick="switchTab('review')">🔍 Current Review</button>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="practiceTab" class="tab-content active">
+            <div id="setupSection" class="setup-section">
+                <div class="input-section">
+                    <h3>📝 Enter Your GMAT Club Question Links</h3>
+                    <textarea id="linkInput" placeholder="Paste your GMAT Club question links here, one per line...
+
+Example:
+https://gmatclub.com/forum/question-1-link
+https://gmatclub.com/forum/question-2-link
+https://gmatclub.com/forum/question-3-link
+..."></textarea>
+                    <div class="help-text">
+                        • Paste one link per line<br>
+                        • Make sure each link is a complete GMAT Club question URL<br>
+                        • Add as many questions as you want - no limit!
+                    </div>
+                </div>
+                
+                <div class="input-section">
+                    <h3>📋 Session Details</h3>
+                    <input type="text" id="sessionName" placeholder="Session Name (e.g., 'Quant Practice Set 1')" 
+                           style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; margin-bottom: 10px;">
+                    <div class="help-text">
+                        • Give this practice session a memorable name<br>
+                        • This will help you track your progress over time
+                    </div>
+                </div>
+                
+                <div class="input-section">
+                    <h3>⏱️ Set Time Limit (Optional)</h3>
+                    <div style="display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="enableTimer" onchange="toggleTimerSettings()">
+                            <span>Enable Timer</span>
+                        </label>
+                        <div id="timerSettings" style="display: none; align-items: center; gap: 10px;">
+                            <input type="number" id="timeLimit" value="90" min="30" max="300" style="width: 80px; padding: 8px; border-radius: 5px; border: 2px solid #e9ecef;">
+                            <span>minutes total</span>
+                            <select id="timerMode" style="padding: 8px; border-radius: 5px; border: 2px solid #e9ecef;">
+                                <option value="total">Total time for all questions</option>
+                                <option value="per-question">Per question</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="help-text">
+                        • Total time: Set overall time limit for entire mock test<br>
+                        • Per question: Set time limit for each individual question<br>
+                        • GMAT average: ~2 minutes per quant/verbal, ~2.5 minutes per DI
+                    </div>
+                </div>
+                <button class="button" onclick="startMockTest()">🚀 Start Mock Test</button>
+            </div>
+
+            <div id="mockSection" class="hidden">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="currentQuestion">1</div>
+                        <div class="stat-label">Current Question</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalQuestions">0</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="remainingQuestions">0</div>
+                        <div class="stat-label">Remaining</div>
+                    </div>
+                    <div class="stat-item" id="timerDisplay" style="display: none;">
+                        <div class="stat-number" id="timeRemaining">00:00</div>
+                        <div class="stat-label" id="timerLabel">Time Left</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="question-display">
+                    <div class="question-number" id="questionNumber">Question 1</div>
+                    
+                    <div class="link-options">
+                        <button class="view-toggle active" id="linkBtn" onclick="setViewMode('link')">🔗 Link Only</button>
+                        <button class="view-toggle" id="embedBtn" onclick="setViewMode('embed')">🖥️ Embed Question</button>
+                    </div>
+                    
+                    <div id="linkView">
+                        <a href="#" target="_blank" id="questionLink" class="question-link">
+                            📖 Open Question in New Tab
+                        </a>
+                    </div>
+                    
+                    <div id="embedView" style="display: none;">
+                        <div class="iframe-container">
+                            <iframe id="questionIframe" src="about:blank"></iframe>
+                        </div>
+                        <a href="#" target="_blank" id="questionLinkEmbed" class="question-link" style="font-size: 0.9em; padding: 10px 20px;">
+                            🔗 Open in New Tab (if embed doesn't work)
+                        </a>
+                    </div>
+
+                    <!-- Question Status Actions -->
+                    <div class="current-session-actions">
+                        <h4>📝 Mark this Question:</h4>
+                        <div class="question-actions">
+                            <button class="action-btn correct" onclick="markQuestion('correct')">✅ Correct</button>
+                            <button class="action-btn incorrect" onclick="markQuestion('incorrect')">❌ Incorrect</button>
+                            <button class="action-btn flag" onclick="markQuestion('flagged')">🚩 Flag for Review</button>
+                            <button class="action-btn skip" onclick="markQuestion('skipped')">⏭️ Skip</button>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <textarea id="currentQuestionNotes" placeholder="Add notes about this question (difficulty, concepts, mistakes made, etc.)" 
+                                      style="width: 100%; height: 60px; border: 1px solid #dee2e6; border-radius: 5px; padding: 8px; font-size: 0.9em;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="button" onclick="nextQuestion()">➡️ Next Question</button>
+                    <button class="button" onclick="previousQuestion()">⬅️ Previous Question</button>
+                    <button class="button" onclick="shuffleQuestions()">🔄 Shuffle Again</button>
+                    <button class="button secondary" onclick="finishSession()">🏁 Finish Session</button>
+                    <button class="button danger" onclick="resetMock()">🔄 New Mock</button>
+                    <button class="button" id="pauseBtn" onclick="toggleTimer()" style="display: none;">⏸️ Pause Timer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session History Tab -->
+        <div id="historyTab" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="color: #2c3e50;">📊 Your Practice Sessions</h2>
+                <button class="button danger" onclick="clearAllSessions()">🗑️ Clear All Sessions</button>
+            </div>
+            <div id="sessionsList">
+                <!-- Sessions will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <!-- Current Review Tab -->
+        <div id="reviewTab" class="tab-content">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">🔍 Current Session Review</h2>
+            <div id="currentReview">
+                <p style="color: #6c757d; font-style: italic;">No active session. Start a practice session to see review options here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentIndex = 0;
+        let originalQuestions = [];
+        let timer = null;
+        let timeRemaining = 0;
+        let timerEnabled = false;
+        let timerMode = 'total';
+        let isPaused = false;
+        let questionStartTime = 0;
+        let viewMode = 'link';
+        let currentSession = null;
+        let sessions = [];
+
+        // Load sessions from memory on startup
+        loadSessions();
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+
+            // Load specific tab content
+            if (tabName === 'history') {
+                displaySessions();
+            } else if (tabName === 'review') {
+                displayCurrentReview();
+            }
+        }
+
+        function setViewMode(mode) {
+            viewMode = mode;
+            
+            document.getElementById('linkBtn').classList.toggle('active', mode === 'link');
+            document.getElementById('embedBtn').classList.toggle('active', mode === 'embed');
+            
+            document.getElementById('linkView').style.display = mode === 'link' ? 'block' : 'none';
+            document.getElementById('embedView').style.display = mode === 'embed' ? 'block' : 'none';
+            
+            displayCurrentQuestion();
+        }
+
+        function toggleTimerSettings() {
+            const checkbox = document.getElementById('enableTimer');
+            const settings = document.getElementById('timerSettings');
+            settings.style.display = checkbox.checked ? 'flex' : 'none';
+        }
+
+        function startMockTest() {
+            const input = document.getElementById('linkInput').value.trim();
+            const sessionName = document.getElementById('sessionName').value.trim() || `Practice Session ${new Date().toLocaleDateString()}`;
+            
+            if (!input) {
+                alert('Please enter your question links first!');
+                return;
+            }
+
+            const links = input.split('\n').filter(link => link.trim() !== '');
+            
+            if (links.length === 0) {
+                alert('Please enter at least one valid link!');
+                return;
+            }
+
+            const validLinks = links.filter(link => {
+                const trimmed = link.trim();
+                return trimmed.startsWith('http') && trimmed.includes('gmatclub.com');
+            });
+
+            if (validLinks.length === 0) {
+                alert('Please enter valid GMAT Club links starting with http!');
+                return;
+            }
+
+            // Initialize new session
+            currentSession = {
+                id: Date.now(),
+                name: sessionName,
+                startTime: new Date(),
+                endTime: null,
+                questions: validLinks.map((link, index) => ({
+                    link: link.trim(),
+                    originalIndex: index + 1,
+                    status: 'unanswered', // unanswered, correct, incorrect, flagged, skipped
+                    timeSpent: 0,
+                    notes: '',
+                    reviewNotes: ''
+                })),
+                totalTime: 0,
+                timerEnabled: false,
+                completed: false
+            };
+
+            originalQuestions = currentSession.questions.map(q => ({...q}));
+            shuffleArray();
+            currentIndex = 0;
+
+            // Setup timer if enabled
+            timerEnabled = document.getElementById('enableTimer').checked;
+            currentSession.timerEnabled = timerEnabled;
+            
+            if (timerEnabled) {
+                const timeLimitInput = parseInt(document.getElementById('timeLimit').value);
+                timerMode = document.getElementById('timerMode').value;
+                
+                if (timerMode === 'total') {
+                    timeRemaining = timeLimitInput * 60;
+                } else {
+                    timeRemaining = timeLimitInput * 60;
+                }
+                
+                document.getElementById('timerDisplay').style.display = 'block';
+                document.getElementById('pauseBtn').style.display = 'inline-block';
+                startTimer();
+            }
+
+            document.getElementById('setupSection').classList.add('hidden');
+            document.getElementById('mockSection').classList.remove('hidden');
+            document.getElementById('totalQuestions').textContent = questions.length;
+
+            displayCurrentQuestion();
+        }
+
+        function markQuestion(status) {
+            if (!currentSession || currentIndex >= questions.length) return;
+
+            const questionId = questions[currentIndex].originalIndex - 1;
+            currentSession.questions[questionId].status = status;
+            
+            // Save notes if any
+            const notes = document.getElementById('currentQuestionNotes').value.trim();
+            if (notes) {
+                currentSession.questions[questionId].notes = notes;
+            }
+
+            // Clear notes for next question
+            document.getElementById('currentQuestionNotes').value = '';
+
+            // Visual feedback
+            const statusText = status.charAt(0).toUpperCase() + status.slice(1);
+            // You could add a brief visual indicator here
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                
+                if (timerEnabled && timerMode === 'per-question') {
+                    const timeLimitInput = parseInt(document.getElementById('timeLimit').value);
+                    timeRemaining = timeLimitInput * 60;
+                    questionStartTime = Date.now();
+                }
+                
+                displayCurrentQuestion();
+            } else {
+                finishSession();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayCurrentQuestion();
+            }
+        }
+
+        function finishSession() {
+            if (!currentSession) return;
+
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            currentSession.endTime = new Date();
+            currentSession.completed = true;
+            currentSession.totalTime = Math.floor((currentSession.endTime - currentSession.startTime) / 1000);
+
+            // Save session
+            sessions.unshift(currentSession); // Add to beginning
+            saveSessions();
+
+            // Show completion message
+            const stats = calculateSessionStats(currentSession);
+            alert(`🎉 Session Complete!\n\nQuestions: ${stats.total}\nCorrect: ${stats.correct}\nIncorrect: ${stats.incorrect}\nFlagged: ${stats.flagged}\nSkipped: ${stats.skipped}\nTime: ${formatTime(currentSession.totalTime)}\n\nSession saved for review!`);
+
+            // Switch to review tab
+            switchTab('review');
+            displayCurrentReview();
+        }
+
+        function calculateSessionStats(session) {
+            const stats = {
+                total: session.questions.length,
+                correct: 0,
+                incorrect: 0,
+                flagged: 0,
+                skipped: 0,
+                unanswered: 0
+            };
+
+            session.questions.forEach(q => {
+                stats[q.status]++;
+            });
+
+            return stats;
+        }
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}m ${secs}s`;
+            } else {
+                return `${minutes}m ${secs}s`;
+            }
+        }
+
+        function displaySessions() {
+            const container = document.getElementById('sessionsList');
+            
+            if (sessions.length === 0) {
+                container.innerHTML = '<p style="color: #6c757d; font-style: italic; text-align: center;">No practice sessions yet. Complete a practice session to see it here!</p>';
+                return;
+            }
+
+            container.innerHTML = sessions.map(session => {
+                const stats = calculateSessionStats(session);
+                const duration = session.endTime ? 
+                    Math.floor((session.endTime - session.startTime) / 1000) : 
+                    Math.floor((new Date() - session.startTime) / 1000);
+
+                return `
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div class="session-title">${session.name}</div>
+                            <div class="session-date">${session.startTime.toLocaleDateString()} ${session.startTime.toLocaleTimeString()}</div>
+                        </div>
+                        <div class="session-stats">
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.total}</div>
+                                <div class="stat-label">Total Questions</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.correct}</div>
+                                <div class="stat-label">Correct</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.incorrect}</div>
+                                <div class="stat-label">Incorrect</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.flagged}</div>
+                                <div class="stat-label">Flagged</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${formatTime(duration)}</div>
+                                <div class="stat-label">Duration</div>
+                            </div>
+                        </div>
+                        <div class="question-list">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">Questions Review:</h4>
+                            ${session.questions.map((question, index) => `
+                                <div class="question-item ${question.status}">
+                                    <div class="question-header">
+                                        <a href="${question.link}" target="_blank" class="question-link-small">
+                                            Question ${index + 1}
+                                        </a>
+                                        <div class="question-status">
+                                            <span class="status-badge status-${question.status}">
+                                                ${question.status.charAt(0).toUpperCase() + question.status.slice(1)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    ${question.notes ? `<div style="font-size: 0.9em; color: #6c757d; margin: 5px 0;"><strong>Session Notes:</strong> ${question.notes}</div>` : ''}
+                                    <div class="error-log">
+                                        <label style="font-size: 0.9em; font-weight: 600; color: #2c3e50;">Review Notes:</label>
+                                        <textarea placeholder="Add your review notes, error analysis, concepts to study..." 
+                                                  onchange="updateQuestionReview(${session.id}, ${index}, this.value)">${question.reviewNotes || ''}</textarea>
+                                        <div class="question-actions" style="margin-top: 8px;">
+                                            <button class="action-btn ${question.status === 'correct' ? 'correct' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'correct')">✅ Correct</button>
+                                            <button class="action-btn ${question.status === 'incorrect' ? 'incorrect' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'incorrect')">❌ Incorrect</button>
+                                            <button class="action-btn ${question.status === 'flagged' ? 'flag' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'flagged')">🚩 Flag</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button class="button danger" onclick="deleteSession(${session.id})">🗑️ Delete Session</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function displayCurrentReview() {
+            const container = document.getElementById('currentReview');
+            
+            if (!currentSession) {
+                container.innerHTML = '<p style="color: #6c757d; font-style: italic;">No active session. Start a practice session to see review options here.</p>';
+                return;
+            }
+
+            const stats = calculateSessionStats(currentSession);
+            const isCompleted = currentSession.completed;
+            
+            container.innerHTML = `
+                <div class="session-card">
+                    <div class="session-header">
+                        <div class="session-title">${currentSession.name} ${isCompleted ? '(Completed)' : '(In Progress)'}</div>
+                        <div class="session-date">Started: ${currentSession.startTime.toLocaleDateString()} ${currentSession.startTime.toLocaleTimeString()}</div>
+                    </div>
+                    
+                    <div class="session-stats">
+                        <div class="session-stat">
+                            <div class="stat-number">${stats.total}</div>
+                            <div class="stat-label">Total Questions</div>
+                        </div>
+                        <div class="session-stat">
+                            <div class="stat-number">${stats.correct}</div>
+                            <div class="stat-label">Correct</div>
+                        </div>
+                        <div class="session-stat">
+                            <div class="stat-number">${stats.incorrect}</div>
+                            <div class="stat-label">Incorrect</div>
+                        </div>
+                        <div class="session-stat">
+                            <div class="stat-number">${stats.flagged}</div>
+                            <div class="stat-label">Flagged</div>
+                        </div>
+                        <div class="session-stat">
+                            <div class="stat-number">${stats.skipped}</div>
+                            <div class="stat-label">Skipped</div>
+                        </div>
+                    </div>
+
+                    <div class="question-list">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">Questions for Review:</h4>
+                        ${currentSession.questions.map((question, index) => `
+                            <div class="question-item ${question.status}">
+                                <div class="question-header">
+                                    <a href="${question.link}" target="_blank" class="question-link-small">
+                                        Question ${index + 1}
+                                    </a>
+                                    <div class="question-status">
+                                        <span class="status-badge status-${question.status}">
+                                            ${question.status.charAt(0).toUpperCase() + question.status.slice(1)}
+                                        </span>
+                                    </div>
+                                </div>
+                                ${question.notes ? `<div style="font-size: 0.9em; color: #6c757d; margin: 5px 0;"><strong>Session Notes:</strong> ${question.notes}</div>` : ''}
+                                <div class="error-log">
+                                    <label style="font-size: 0.9em; font-weight: 600; color: #2c3e50;">Review Notes & Error Analysis:</label>
+                                    <textarea placeholder="What went wrong? Key concepts to review? Strategy improvements needed?" 
+                                              onchange="updateCurrentQuestionReview(${index}, this.value)">${question.reviewNotes || ''}</textarea>
+                                    <div class="question-actions" style="margin-top: 8px;">
+                                        <button class="action-btn ${question.status === 'correct' ? 'correct' : 'secondary'}" 
+                                                onclick="updateCurrentQuestionStatus(${index}, 'correct')">✅ Correct</button>
+                                        <button class="action-btn ${question.status === 'incorrect' ? 'incorrect' : 'secondary'}" 
+                                                onclick="updateCurrentQuestionStatus(${index}, 'incorrect')">❌ Incorrect</button>
+                                        <button class="action-btn ${question.status === 'flagged' ? 'flag' : 'secondary'}" 
+                                                onclick="updateCurrentQuestionStatus(${index}, 'flagged')">🚩 Flag for Review</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    ${!isCompleted ? `
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button class="button" onclick="switchTab('practice')">📝 Continue Practice</button>
+                            <button class="button success" onclick="finishSession()">🏁 Finish Session</button>
+                        </div>
+                    ` : `
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button class="button success" onclick="exportSessionData()">📄 Export Session</button>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function updateQuestionReview(sessionId, questionIndex, reviewNotes) {
+            const session = sessions.find(s => s.id === sessionId);
+            if (session) {
+                session.questions[questionIndex].reviewNotes = reviewNotes;
+                saveSessions();
+            }
+        }
+
+        function updateQuestionStatus(sessionId, questionIndex, status) {
+            const session = sessions.find(s => s.id === sessionId);
+            if (session) {
+                session.questions[questionIndex].status = status;
+                saveSessions();
+                displaySessions(); // Refresh display
+            }
+        }
+
+        function updateCurrentQuestionReview(questionIndex, reviewNotes) {
+            if (currentSession) {
+                currentSession.questions[questionIndex].reviewNotes = reviewNotes;
+                if (currentSession.completed) {
+                    // Update in sessions array if completed
+                    const sessionIndex = sessions.findIndex(s => s.id === currentSession.id);
+                    if (sessionIndex !== -1) {
+                        sessions[sessionIndex] = currentSession;
+                        saveSessions();
+                    }
+                }
+            }
+        }
+
+        function updateCurrentQuestionStatus(questionIndex, status) {
+            if (currentSession) {
+                currentSession.questions[questionIndex].status = status;
+                if (currentSession.completed) {
+                    const sessionIndex = sessions.findIndex(s => s.id === currentSession.id);
+                    if (sessionIndex !== -1) {
+                        sessions[sessionIndex] = currentSession;
+                        saveSessions();
+                    }
+                }
+                displayCurrentReview(); // Refresh display
+            }
+        }
+
+        function deleteSession(sessionId) {
+            if (confirm('Are you sure you want to delete this session? This cannot be undone.')) {
+                sessions = sessions.filter(s => s.id !== sessionId);
+                saveSessions();
+                displaySessions();
+            }
+        }
+
+        function clearAllSessions() {
+            if (confirm('Are you sure you want to delete ALL sessions? This cannot be undone.')) {
+                sessions = [];
+                saveSessions();
+                displaySessions();
+            }
+        }
+
+        function exportSessionData() {
+            if (!currentSession) return;
+            
+            const exportData = {
+                sessionName: currentSession.name,
+                date: currentSession.startTime.toLocaleDateString(),
+                duration: formatTime(currentSession.totalTime),
+                questions: currentSession.questions.map((q, index) => ({
+                    questionNumber: index + 1,
+                    link: q.link,
+                    status: q.status,
+                    sessionNotes: q.notes,
+                    reviewNotes: q.reviewNotes
+                }))
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `GMAT_Session_${currentSession.name.replace(/[^a-z0-9]/gi, '_')}_${currentSession.startTime.toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        function saveSessions() {
+            // Store in memory for the session - in a real app you'd use localStorage
+            // Note: We're not using localStorage per the restrictions
+        }
+
+        function loadSessions() {
+            // Load from memory - in a real app you'd use localStorage
+            // Starting with empty array for this session
+            sessions = [];
+        }
+
+        function startTimer() {
+            if (timerMode === 'per-question') {
+                const timeLimitInput = parseInt(document.getElementById('timeLimit').value);
+                timeRemaining = timeLimitInput * 60;
+                questionStartTime = Date.now();
+            }
+            
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            if (isPaused) return;
+            
+            timeRemaining--;
+            updateTimerDisplay();
+            
+            if (timeRemaining <= 0) {
+                handleTimeUp();
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('timeRemaining').textContent = timeString;
+            
+            const timerElement = document.getElementById('timeRemaining');
+            if (timeRemaining <= 60) {
+                timerElement.style.color = '#dc3545';
+            } else if (timeRemaining <= 300) {
+                timerElement.style.color = '#fd7e14';
+            } else {
+                timerElement.style.color = '#667eea';
+            }
+        }
+
+        function handleTimeUp() {
+            clearInterval(timer);
+            
+            if (timerMode === 'total') {
+                alert('⏰ Time\'s up! Your mock test is complete.');
+                finishSession();
+            } else {
+                alert('⏰ Time\'s up for this question! Moving to next question.');
+                nextQuestion();
+            }
+        }
+
+        function toggleTimer() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pauseBtn');
+            btn.textContent = isPaused ? '▶️ Resume Timer' : '⏸️ Pause Timer';
+        }
+
+        function shuffleArray() {
+            questions = [...originalQuestions];
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+        }
+
+        function displayCurrentQuestion() {
+            if (questions.length === 0) return;
+
+            const current = questions[currentIndex];
+            const questionNumber = currentIndex + 1;
+            const remaining = questions.length - currentIndex;
+
+            document.getElementById('currentQuestion').textContent = questionNumber;
+            document.getElementById('remainingQuestions').textContent = remaining;
+
+            const progress = ((currentIndex + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            document.getElementById('questionNumber').textContent = 
+                `Question ${questionNumber} of ${questions.length}`;
+            
+            if (viewMode === 'link') {
+                const linkElement = document.getElementById('questionLink');
+                linkElement.href = current.link;
+                linkElement.textContent = `📖 Open Question ${questionNumber} in New Tab`;
+            } else {
+                const iframe = document.getElementById('questionIframe');
+                iframe.src = current.link;
+                
+                const linkElement = document.getElementById('questionLinkEmbed');
+                linkElement.href = current.link;
+                linkElement.textContent = `🔗 Open Question ${questionNumber} in New Tab`;
+            }
+
+            // Load existing notes for this question
+            if (currentSession) {
+                const questionId = current.originalIndex - 1;
+                const questionData = currentSession.questions[questionId];
+                document.getElementById('currentQuestionNotes').value = questionData.notes || '';
+            }
+        }
+
+        function shuffleQuestions() {
+            shuffleArray();
+            currentIndex = 0;
+            displayCurrentQuestion();
+        }
+
+        function resetMock() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+            
+            // Save current session if it exists and has progress
+            if (currentSession && !currentSession.completed) {
+                if (confirm('You have an active session. Do you want to save it before starting a new one?')) {
+                    finishSession();
+                    return; // Let finishSession handle the transition
+                }
+            }
+            
+            timerEnabled = false;
+            isPaused = false;
+            timeRemaining = 0;
+            currentSession = null;
+            
+            document.getElementById('setupSection').classList.remove('hidden');
+            document.getElementById('mockSection').classList.add('hidden');
+            document.getElementById('linkInput').value = '';
+            document.getElementById('sessionName').value = '';
+            document.getElementById('enableTimer').checked = false;
+            document.getElementById('timerSettings').style.display = 'none';
+            document.getElementById('timerDisplay').style.display = 'none';
+            document.getElementById('pauseBtn').style.display = 'none';
+            
+            questions = [];
+            originalQuestions = [];
+            currentIndex = 0;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (document.getElementById('mockSection').classList.contains('hidden')) return;
+            
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
+                nextQuestion();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                previousQuestion();
+            } else if (event.key === 'r' || event.key === 'R') {
+                event.preventDefault();
+                shuffleQuestions();
+            } else if (event.key === '1') {
+                event.preventDefault();
+                markQuestion('correct');
+            } else if (event.key === '2') {
+                event.preventDefault();
+                markQuestion('incorrect');
+            } else if (event.key === '3') {
+                event.preventDefault();
+                markQuestion('flagged');
+            } else if (event.key === '4') {
+                event.preventDefault();
+                markQuestion('skipped');
+            }
+        });
+    </script>
+</body>
+</html>

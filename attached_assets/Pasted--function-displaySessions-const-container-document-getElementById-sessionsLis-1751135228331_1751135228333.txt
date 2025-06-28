@@ -1,0 +1,79 @@
+     function displaySessions() {
+            const container = document.getElementById('sessionsList');
+            
+            if (sessions.length === 0) {
+                container.innerHTML = '<p style="color: #6c757d; font-style: italic; text-align: center;">No practice sessions yet. Complete a practice session to see it here!</p>';
+                return;
+            }
+
+            container.innerHTML = sessions.map(session => {
+                const stats = calculateSessionStats(session);
+                const duration = session.endTime ? 
+                    Math.floor((session.endTime - session.startTime) / 1000) : 
+                    Math.floor((new Date() - session.startTime) / 1000);
+
+                return `
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div class="session-title">${session.name}</div>
+                            <div class="session-date">${session.startTime.toLocaleDateString()} ${session.startTime.toLocaleTimeString()}</div>
+                        </div>
+                        <div class="session-stats">
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.total}</div>
+                                <div class="stat-label">Total Questions</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.correct}</div>
+                                <div class="stat-label">Correct</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.incorrect}</div>
+                                <div class="stat-label">Incorrect</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${stats.flagged}</div>
+                                <div class="stat-label">Flagged</div>
+                            </div>
+                            <div class="session-stat">
+                                <div class="stat-number">${formatTime(duration)}</div>
+                                <div class="stat-label">Duration</div>
+                            </div>
+                        </div>
+                        <div class="question-list">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">Questions Review:</h4>
+                            ${session.questions.map((question, index) => `
+                                <div class="question-item ${question.status}">
+                                    <div class="question-header">
+                                        <a href="${question.link}" target="_blank" class="question-link-small">
+                                            Question ${index + 1}
+                                        </a>
+                                        <div class="question-status">
+                                            <span class="status-badge status-${question.status}">
+                                                ${question.status.charAt(0).toUpperCase() + question.status.slice(1)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    ${question.notes ? `<div style="font-size: 0.9em; color: #6c757d; margin: 5px 0;"><strong>Session Notes:</strong> ${question.notes}</div>` : ''}
+                                    <div class="error-log">
+                                        <label style="font-size: 0.9em; font-weight: 600; color: #2c3e50;">Review Notes:</label>
+                                        <textarea placeholder="Add your review notes, error analysis, concepts to study..." 
+                                                  onchange="updateQuestionReview(${session.id}, ${index}, this.value)">${question.reviewNotes || ''}</textarea>
+                                        <div class="question-actions" style="margin-top: 8px;">
+                                            <button class="action-btn ${question.status === 'correct' ? 'correct' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'correct')">✅ Correct</button>
+                                            <button class="action-btn ${question.status === 'incorrect' ? 'incorrect' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'incorrect')">❌ Incorrect</button>
+                                            <button class="action-btn ${question.status === 'flagged' ? 'flag' : 'secondary'}" 
+                                                    onclick="updateQuestionStatus(${session.id}, ${index}, 'flagged')">🚩 Flag</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button class="button danger" onclick="deleteSession(${session.id})">🗑️ Delete Session</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
