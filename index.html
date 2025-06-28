@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMAT Mini-Mock Prep - Enhanced</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GMAT Mini-Mock Prep</h1>
+        <p class="subtitle">Enhanced with Session Tracking & Error Analysis</p>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="practice">📝 Practice</button>
+            <button class="nav-tab" data-tab="history">📊 Session History</button>
+            <button class="nav-tab" data-tab="review">🔍 Current Review</button>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="practice" class="tab-content active">
+            <div class="setup-section">
+                <div class="input-section">
+                    <h3>📋 Question Links</h3>
+                    <textarea id="questionLinks" placeholder="Paste your GMAT question links here (one per line)..."></textarea>
+                    <div class="help-text">
+                        <strong>Supported formats:</strong><br>
+                        • gmatclub.com/forum/... URLs<br>
+                        • Direct question links<br>
+                        • One link per line
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>📝 Session Name</h3>
+                    <input type="text" id="sessionName" placeholder="Enter session name (e.g., 'Quant Practice #1')" class="session-input">
+                    <div class="help-text">Give your practice session a memorable name for easy tracking</div>
+                </div>
+
+                <div class="controls">
+                    <button class="button" onclick="startPractice()">🚀 Start Practice Session</button>
+                    <button class="button secondary" onclick="clearInputs()">🗑️ Clear Inputs</button>
+                </div>
+            </div>
+
+            <!-- Practice Session Display -->
+            <div id="practiceSession" class="hidden">
+                <div class="current-session-actions">
+                    <h4>📊 Current Session: <span id="currentSessionName"></span></h4>
+                    <div class="controls">
+                        <button class="button success" onclick="finishSession()">✅ Finish Session</button>
+                        <button class="button danger" onclick="cancelSession()">❌ Cancel Session</button>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="currentQuestionNum">1</div>
+                        <div class="stat-label">Current Question</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalQuestions">0</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="sessionTime">0m 0s</div>
+                        <div class="stat-label">Session Time</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="question-display" id="questionDisplay">
+                    <!-- Current question will be displayed here -->
+                </div>
+
+                <div class="controls">
+                    <button class="button secondary" onclick="previousQuestion()" id="prevBtn">⬅️ Previous</button>
+                    <button class="button" onclick="nextQuestion()" id="nextBtn">Next ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session History Tab -->
+        <div id="history" class="tab-content">
+            <div class="section-header">
+                <h2>📊 Your Practice Sessions</h2>
+                <button class="button danger" onclick="confirmClearAllSessions()">🗑️ Clear All Sessions</button>
+            </div>
+            <div id="sessionsList">
+                <!-- Sessions will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Current Review Tab -->
+        <div id="review" class="tab-content">
+            <div class="section-header">
+                <h2>🔍 Current Session Review</h2>
+                <div id="currentReviewContent">
+                    <p style="color: #6c757d; font-style: italic; text-align: center;">
+                        Start a practice session to review questions here.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <span id="toastMessage"></span>
+            <button onclick="hideToast()" class="toast-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="confirmTitle">Confirm Action</h3>
+            <p id="confirmMessage">Are you sure you want to proceed?</p>
+            <div class="modal-actions">
+                <button class="button danger" id="confirmYes">Yes, Proceed</button>
+                <button class="button secondary" onclick="hideConfirmModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
